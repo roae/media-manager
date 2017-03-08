@@ -6,7 +6,7 @@
  * Time: 18:42.
  */
 
-namespace TalvBansal\MediaManager\Contracts;
+namespace Roae\MediaManager\Contracts;
 
 interface FileUploaderInterface
 {

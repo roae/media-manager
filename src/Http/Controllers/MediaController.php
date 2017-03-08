@@ -6,13 +6,13 @@
  * Time: 12:23.
  */
 
-namespace TalvBansal\MediaManager\Http\Controllers;
+namespace Roae\MediaManager\Http\Controllers;
 
 use Illuminate\Http\Request;
-use TalvBansal\MediaManager\Http\Requests\UploadFileRequest;
-use TalvBansal\MediaManager\Http\Requests\UploadNewFolderRequest;
-use TalvBansal\MediaManager\Http\UploadedFiles;
-use TalvBansal\MediaManager\Services\MediaManager;
+use Roae\MediaManager\Http\Requests\UploadFileRequest;
+use Roae\MediaManager\Http\Requests\UploadNewFolderRequest;
+use Roae\MediaManager\Http\UploadedFiles;
+use Roae\MediaManager\Services\MediaManager;
 
 /**
  * Class FileManagerController.

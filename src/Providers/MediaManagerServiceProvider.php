@@ -6,7 +6,7 @@
  * Time: 16:04.
  */
 
-namespace TalvBansal\MediaManager\Providers;
+namespace Roae\MediaManager\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -45,7 +45,7 @@ class MediaManagerServiceProvider extends ServiceProvider
     private function defineResources()
     {
         $this->publishes([
-            MEDIA_MANAGER_BASE_PATH.'/public' => resource_path('/assets/talvbansal/media-manager'),
+            MEDIA_MANAGER_BASE_PATH.'/public' => resource_path('/assets/Roae/media-manager'),
         ], 'media-manager');
     }
 }

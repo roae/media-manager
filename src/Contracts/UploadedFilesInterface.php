@@ -6,7 +6,7 @@
  * Time: 18:44.
  */
 
-namespace TalvBansal\MediaManager\Contracts;
+namespace Roae\MediaManager\Contracts;
 
 use Illuminate\Support\Collection;
 

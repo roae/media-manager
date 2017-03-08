@@ -6,7 +6,7 @@
  * Time: 22:47.
  */
 
-namespace TalvBansal\MediaManager\Http\Controllers;
+namespace Roae\MediaManager\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

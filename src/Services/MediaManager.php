@@ -1,6 +1,6 @@
 <?php
 
-namespace TalvBansal\MediaManager\Services;
+namespace Roae\MediaManager\Services;
 
 use Carbon\Carbon;
 use Dflydev\ApacheMimeTypes\PhpRepository;
@@ -8,9 +8,9 @@ use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
-use TalvBansal\MediaManager\Contracts\FileMoverInterface;
-use TalvBansal\MediaManager\Contracts\FileUploaderInterface;
-use TalvBansal\MediaManager\Contracts\UploadedFilesInterface;
+use Roae\MediaManager\Contracts\FileMoverInterface;
+use Roae\MediaManager\Contracts\FileUploaderInterface;
+use Roae\MediaManager\Contracts\UploadedFilesInterface;
 
 /**
  * Class MediaManager.

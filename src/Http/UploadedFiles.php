@@ -6,10 +6,10 @@
  * Time: 18:59.
  */
 
-namespace TalvBansal\MediaManager\Http;
+namespace Roae\MediaManager\Http;
 
 use Illuminate\Support\Collection;
-use TalvBansal\MediaManager\Contracts\UploadedFilesInterface;
+use Roae\MediaManager\Contracts\UploadedFilesInterface;
 
 class UploadedFiles extends Collection implements UploadedFilesInterface
 {

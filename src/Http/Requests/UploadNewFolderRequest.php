@@ -1,6 +1,6 @@
 <?php
 
-namespace TalvBansal\MediaManager\Http\Requests;
+namespace Roae\MediaManager\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
