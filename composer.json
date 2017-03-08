@@ -1,5 +1,5 @@
 {
-  "name": "talvbansal/media-manager",
+  "name": "roae/media-manager",
   "description": "A media browser and uploader for laravel apps written in vue js and bootstrap",
   "keywords": [
     "media",
@@ -30,9 +30,9 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^5.0",
-    "illuminate/support": "^5.3",
-    "illuminate/routing": "^5.3",
-    "orchestra/testbench": "3.3"
+    "illuminate/support": "^5.1",
+    "illuminate/routing": "^5.1",
+    "orchestra/testbench": "3.1"
   },
   "autoload": {
     "psr-4": {
