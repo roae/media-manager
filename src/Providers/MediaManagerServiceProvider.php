@@ -45,7 +45,7 @@ class MediaManagerServiceProvider extends ServiceProvider
     private function defineResources()
     {
         $this->publishes([
-            MEDIA_MANAGER_BASE_PATH.'/public' => resource_path('/assets/Roae/media-manager'),
+            MEDIA_MANAGER_BASE_PATH.'/public' => base_path('/resources/assets/Roae/media-manager'),
         ], 'media-manager');
     }
 }
