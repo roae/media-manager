@@ -1,5 +1,7 @@
 >#### Clone [talvbansal/media-manager](https://github.com/talvbansal/media-manager)
 >Laravel 5.1 support added
+
+
 # Media Manager
 
 Media manager is a basic file uploader and manager component for **Laravel** written in **Vue.js 2.0**
@@ -21,7 +23,6 @@ Add to `composer.json` file:
 ```json
 //composer.json
 {
-    //.....
     "repositories": [
         {
             "type": "vcs",
