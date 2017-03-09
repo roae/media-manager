@@ -21,7 +21,7 @@
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.8",
     "lodash": "^4.16.2",
-    "momentjs": "^1.1.15",
+    "moment": "^1.1.15",
     "node-sass": "^3.10.1",
     "resolve-url-loader": "^1.6.0",
     "sass-loader": "^4.0.2",

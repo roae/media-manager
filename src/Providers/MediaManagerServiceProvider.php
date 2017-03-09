@@ -22,6 +22,7 @@ class MediaManagerServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->defineResources();
+            $this->defineRoutes();
         }
     }
 
@@ -45,7 +46,18 @@ class MediaManagerServiceProvider extends ServiceProvider
     private function defineResources()
     {
         $this->publishes([
-            MEDIA_MANAGER_BASE_PATH.'/public' => base_path('/resources/assets/Roae/media-manager'),
-        ], 'media-manager');
+            MEDIA_MANAGER_BASE_PATH.'/public' => base_path('/resources/assets/roae/media-manager'),
+        ], 'media-manager-assets');
+    }
+
+    /**
+     * Publish roues to host application
+     * This is only when the application is run in the console.
+     */
+    private function defineRoutes()
+    {
+        $this->publishes([
+            MEDIA_MANAGER_BASE_PATH.'/src/Http/routes.php' => app_path('/Http/media-manager-routes.php'),
+        ], 'media-manager-routes');
     }
 }

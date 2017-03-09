@@ -5,7 +5,7 @@ namespace Roae\MediaManager\Services;
 use Carbon\Carbon;
 use Dflydev\ApacheMimeTypes\PhpRepository;
 use Illuminate\Filesystem\FilesystemAdapter;
-use Illuminate\Http\UploadedFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Roae\MediaManager\Contracts\FileMoverInterface;
@@ -376,11 +376,12 @@ class MediaManager implements FileUploaderInterface, FileMoverInterface
                 return $uploaded;
             }
 
-            if (!$file->storeAs($path, $fileName, 'public')) {
+            if (!$file->move(config('filesystems.disks.public.root').$path, $fileName)) {
                 $this->errors[] = trans('media-manager::messages.upload_error', ['entity' => $fileName]);
 
                 return $uploaded;
             }
+
             $uploaded++;
 
             return $uploaded;

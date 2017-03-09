@@ -1,15 +1,9 @@
+>#### Clone [talvbansal/media-manager](https://github.com/talvbansal/media-manager)
+>Laravel 5.1 support added
 # Media Manager
 
->Media manager is a basic file uploader and manager component for **Laravel** written in **Vue.js 2.0**
-
-_For **Vue.js 1.x** please use [Version 1.0.x](https://github.com/talvbansal/media-manager/tree/v1.0.6)_
-
-[![Build Status](https://api.travis-ci.org/talvbansal/media-manager.svg)](https://travis-ci.org/talvbansal/media-manager)
-[![Style CI](https://styleci.io/repos/66978705/shield?style=flat)](https://styleci.io/repos/66978705)
-[![Issues](https://img.shields.io/github/issues/talvbansal/media-manager.svg)](https://github.com/talvbansal/media-manager/issues)
-[![Total Downloads](https://poser.pugx.org/talvbansal/media-manager/downloads)](https://packagist.org/packages/talvbansal/media-manager)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/5079adde-e1f8-437e-bc76-285981053298.svg?style=flat)](https://insight.sensiolabs.com/projects/5079adde-e1f8-437e-bc76-285981053298)
-[![License](https://poser.pugx.org/talvbansal/media-manager/license)](https://github.com/talvbansal/media-manager/blob/master/licence)
+Media manager is a basic file uploader and manager component for **Laravel** written in **Vue.js 2.0**
+ 
 
 ## # Introduction
 Media Manager provides a simple way for users to upload and manage content to be used throughout your project.
@@ -18,48 +12,52 @@ Media Manager provides a simple way for users to upload and manage content to be
 
 - [PHP](https://php.net) >= 5.6
 - [Composer](https://getcomposer.org)
-- An existing [Laravel 5.3](https://laravel.com/docs/master/installation) project
+- An existing [Laravel 5.1](https://laravel.com/docs/5.1/installation) project
 
 ## # Installation
+To get started, install Media Manager via the Composer package manager:  
 
-To get started, install Media Manager via the Composer package manager: 
-```bash
-composer require talvbansal/media-manager
+Add to `composer.json` file: 
+```json
+//composer.json
+{
+    //.....
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/roae/media-manager.git"
+        }
+    ]
+}
 ```
 
-Next, register the Media Manager service provider in the `providers` array of your `config/app.php` configuration file:
+Next, add to require object the `roae/media-manager@2.0.*` dependency
+
+```json
+    "roae/media-manager": "2.0.*",
+```
+
+Next, install it using the command:
+```bash
+composer update
+```
+After composer downloads and installs the package, registers the Media Manager Services Provider in the `providers` configuration and your `app/config.php` configuration file:
 ```php
-\TalvBansal\MediaManager\Providers\MediaManagerServiceProvider::class,
+\Roae\MediaManager\Providers\MediaManagerServiceProvider::class,
 ```
 
 The Media Manager service provider **does not** automatically register routes for the Media Manager to work. This is so that you can add custom middleware around those routes. You can register all of the routes required for the Media Manager by adding the following to your `routes/web.php` file: 
 ```php
-\TalvBansal\MediaManager\Routes\MediaRoutes::get();
+\Roae\MediaManager\Routes\MediaRoutes::get();
 ```
 
 After registering the Media Manager service provider, you should publish the Media Manager assets using the `vendor:publish` Artisan command: 
 ```bash
-php artisan vendor:publish --tag=media-manager --force
+# PUBLISH ASSETS
+php artisan vendor:publish --tag=media-manager-assets --force
 ```
 Media Manager assets are **not** published to the `public` folder as would be normally expected, instead they will be published to `/resources/assets/talvbansal`.
 Since the Media Manger is written in `vue.js 2.0` you'll need to use webpack or another bundler to get the code ready for the browser. You can then bundle these with your existing scripts in your projects `gulpfile.js`.
-
-First you'll need to add the media-manager reference within your `resources/assets/js/app.js` file:
-
-```javascript
-require('./bootstrap');
-require('./../talvbansal/media-manager/js/media-manager');
-
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
-
-```
-
-Then make sure that the styles and icons are bundled too:
-
 ```javascript
 //gulpfile.js
 var elixir = require('laravel-elixir');
@@ -70,30 +68,63 @@ elixir(function(mix) {
 
     // Add additional styles...
     mix.sass([
-        '../talvbansal/media-manager/css/media-manager.css',
+        '../roae/media-manager/css/media-manager.css',
         'app.scss'
     ]);
+   
+    // Combine the various JS into one.
+      mix.scripts([
+        'app.js',
+        '../../resources/assets/roae/media-manager/js/media-manager.js',
+      ], null, 'public/js');
 
     // Add dependencies and components...
-    mix.webpack(['app.js']);
+    mix.webpack(['../../../public/js/all.js']);
 
     // Copy SVG images into the public directory...
-    mix.copy( 'resources/assets/talvbansal/media-manager/fonts', 'public/fonts' );
+      mix.copy( 'resources/assets/roae/media-manager/fonts', 'public/fonts' );
 });
-
 ```
-
-The media manager uses the `public` disk to store its uploads. The storage path for the `public` disk by default is `storage/app/public`. To make these files accessible from the web, use the following `storage:link` artisan command to generate a symbolic link to `public/storage`:
+After publish the assets files, you need to publish routes for the package using the artisan command `vendor:publish`:
 ```bash
-php artisan storage:link
+# PUBLISH ROUTES
+php artisan vendor:publish --tag=media-manager-routes --force
 ```
-Read more about the public disk [on the Laravel documentation](https://laravel.com/docs/5.3/filesystem#the-public-disk).
 
-## # Getting Started
+This command will create the `app/Http/media-manager-routes.php` file, then you must be include this file on your `routes.php` file or create your own Media Manager routes.
+
+```php
+require app_path('Http/media-manager-routes.php');
+```
+Next, add the `public` disk on `config/filesystems.php` file
+```php
+'disk' => [
+    //....
+    'public' => [
+        'driver' => 'local',
+        'root'   => storage_path('app/public'),
+    ],
+]
+```
+
+The media manager uses the `public` disk to store its uploads. The storage path for the `public` disk by default is `storage/app/public`.
+To make these files accessible from the web, add the following route to your `app/Http/routes.php` file:
+```php
+Route::get('storage/{path}',function($path){
+    $disk = Storage::disk('public');
+    if($disk->has($path)){
+        $file = $disk->get($path);
+        $mime_type = $disk->mimeType($path);
+        return Response::make($file, 200, ['Content-Type' => $mime_type]);
+    }
+})->where('path', '.+');
+```
+This could work using `.htaccess` file and `mod_rewrite` activated on apache.
+
+## # Getting starter
 
 The Media Manager is written in `vue.js 2.0` and comes bundled with all the dependencies required to get going very quickly.
 After you've added the dependencies to your layout if your project doesn't already use `vue.js 2.0` you'll need to create a **Vue instance** on the page that you want to use the Media Manager on:
-
 ```javascript
 <script>
     new Vue({
@@ -101,16 +132,15 @@ After you've added the dependencies to your layout if your project doesn't alrea
     });
 </script>
 ```
-
 This tells Vue to use an element with the id of `app` on your page as its container - a specific area in which `vue.js` will interact. Vue will not interact with anything outside of this element.
 
 You will also need to add the following to your layout if it doesn't already exist.
 It provides the `csrfToken` used for the `vue-resource` http requests that the Media Manager will make.
 ```javascript
 <script>
-    window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-    ]); ?>
+    window.Laravel = {!! json_encode([
+      'csrfToken' => csrf_token(),
+    ]) !!}
 </script>
 ```
 
