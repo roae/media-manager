@@ -47,11 +47,6 @@ After composer downloads and installs the package, registers the Media Manager S
 \Roae\MediaManager\Providers\MediaManagerServiceProvider::class,
 ```
 
-The Media Manager service provider **does not** automatically register routes for the Media Manager to work. This is so that you can add custom middleware around those routes. You can register all of the routes required for the Media Manager by adding the following to your `routes/web.php` file: 
-```php
-\Roae\MediaManager\Routes\MediaRoutes::get();
-```
-
 After registering the Media Manager service provider, you should publish the Media Manager assets using the `vendor:publish` Artisan command: 
 ```bash
 # PUBLISH ASSETS
