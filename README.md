@@ -81,6 +81,23 @@ elixir(function(mix) {
       mix.copy( 'resources/assets/roae/media-manager/fonts', 'public/fonts' );
 });
 ```
+`laravel-elixir-vue-2` needs **Laravel elixir 6.0** and **webpack** to bundle the Vue Media Manager component, for this reason, you have to update and add the following dependencies to your package.json file and run the `npm install` command:
+
+```json
+{
+ "devDependencies": {
+    "laravel-elixir-browsersync-official": "^1.0.0",
+    "laravel-elixir-vue-2": "^0.3.0",
+    "laravel-elixir-webpack-official": "^1.0.10",
+    "bootstrap-sass": "^3.3.7"
+  },
+  "dependencies": {
+    "laravel-elixir": "^6.0.0-9"
+  }
+ }
+```
+After, bundle de assets files runnig the `gulp default` or `gulp --production`command
+
 After publish the assets files, you need to publish routes for the package using the artisan command `vendor:publish`:
 ```bash
 # PUBLISH ROUTES
